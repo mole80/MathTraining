@@ -21,6 +21,11 @@
         android:layout_height="wrap_content"
          android:text="Livrets"/>
 
+     <Button
+         android:id="@+id/bt_menu_calcArith"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:text="Calcul"/>
     </LinearLayout>
 
 

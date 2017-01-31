@@ -17,8 +17,13 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    //TextView activity title
+    <style name="StyleButtonClavier">
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:textSize">30sp</item>
+    </style>
 
+    //TextView activity title
     <style name="StyleTextViewTitle">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
@@ -28,8 +33,15 @@
         <item name="android:layout_marginBottom">10dp</item>
     </style>
 
-    //Table
+    <style name="StyleTextViewResult">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginBottom">12dp</item>
+    </style>
 
+    //Table
     <style name="StyleTable">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -38,8 +50,8 @@
         <item name="android:layout_marginRight">10dp</item>
     </style>
 
-    //Livret choice
 
+    //Livret choice
     <style name="StyleRadioButton">
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_marginBottom">5dp</item>

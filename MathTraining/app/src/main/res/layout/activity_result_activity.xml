@@ -11,15 +11,13 @@
     tools:context="free.mathtraining.result_activity">
 
     <LinearLayout
+        android:layout_above="@+id/ll_button_result"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/tv_result_ok"
-            style="@style/StyleTextViewResult" />
-
-        <TextView
+            android:text="time aaa"
             android:id="@+id/tv_result_time"
             style="@style/StyleTextViewResult" />
 
@@ -27,11 +25,36 @@
             android:id="@+id/tv_result_time_mean"
             style="@style/StyleTextViewResult" />
 
+         <TextView
+            android:id="@+id/tv_result_ok"
+            style="@style/StyleTextViewResult"
+            android:text="xxxxx"/>
+
+        <TextView
+           style="@style/StyleTextViewTitle"
+            android:text="Liste des erreurs"/>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lv_listError">
+        </ListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_button_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_alignParentBottom="true">
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bt_result_restart"
-            android:text="Continue"/>
+            android:layout_marginRight="35dp"
+            android:text="Recommencer"/>
 
         <Button
             android:layout_width="wrap_content"

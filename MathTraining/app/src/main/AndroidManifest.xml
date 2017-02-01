@@ -20,7 +20,8 @@
             android:label="@string/title_activity_livret"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".CalculActivity" />
-        <activity android:name=".result_activity"></activity>
+        <activity android:name=".result_activity" />
+        <activity android:name=".config_calcul_activity"></activity>
     </application>
 
 </manifest>

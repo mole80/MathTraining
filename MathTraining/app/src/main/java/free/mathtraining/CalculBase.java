@@ -8,8 +8,11 @@ public class CalculBase {
     public enum eOperation {Plus, Minus, Divid, Multiply};
     public enum eType {FindFirst, FindSecond, FindRes};
 
+    public ArrayList<String> ErrorList;
+
     public int NbrCalc;
     public int NbrCalOk;
+    public int NbrCalKo;
     public int CptCalc;
 
     public long StartTime;
@@ -17,6 +20,7 @@ public class CalculBase {
     public long MaxTime;
     public long MinTime;
     public long MeanTime;
+    long InterTime;
 
     public String Res;
     public String Nbr1;
@@ -26,8 +30,28 @@ public class CalculBase {
 
     Random rand = new Random();
 
+    public static eOperation OpFromString(String s)
+    {
+        switch (s){
+            case "+":
+                return eOperation.Plus;
+            case "-":
+                return eOperation.Minus;
+            case "*":
+            case "x":
+            case "X":
+                return eOperation.Multiply;
+            case "/":
+                return eOperation.Divid;
+
+            default:
+                return eOperation.Plus;
+        }
+    }
+
     public CalculBase()
     {
+        ErrorList = new ArrayList<String>();
         NbrCalc = 0;
         NbrCalOk = 0;
         CptCalc = 0;
@@ -36,6 +60,9 @@ public class CalculBase {
         Nbr2 = "";
         Operation = eOperation.Plus;
         Type = eType.FindFirst;
+        NbrCalKo = 0;
+        MaxTime = 0;
+        MinTime = Integer.MAX_VALUE;
     }
 
     public double Calcul(double n1, double n2, eOperation op)
@@ -60,7 +87,14 @@ public class CalculBase {
 
     public String GetTimeTotal()
     {
-        return Long.toString((StopTime - StartTime)/1000);
+        long t =(StopTime - StartTime);
+
+        long second = (t / 1000) % 60;
+        long minute = (t/ (1000 * 60)) % 60;
+
+        String time = Long.toString(minute) + " min  :  " + Long.toString(second) + " sec";
+
+        return time;
     }
 
     public String GetTimeMean()
@@ -126,8 +160,12 @@ public class CalculBase {
 
     public void StartNewGame()
     {
+        ErrorList.clear();
+        MaxTime = 0;
+        MinTime = Integer.MAX_VALUE;
         CptCalc = 0;
         NbrCalOk = 0;
+        NbrCalKo = 0;
         StartTime = System.currentTimeMillis();
     }
 
@@ -138,7 +176,8 @@ public class CalculBase {
     }
 
     public void NextCalcul(){
-        CptCalc++;
+       // CptCalc++;
+        InterTime = System.currentTimeMillis();
     }
 
     public boolean Check(String val)
@@ -161,9 +200,18 @@ public class CalculBase {
         }
 
         boolean res = resComp.equals(val);
-        if( res )
+        if( res ) {
             NbrCalOk++;
+            long t = System.currentTimeMillis() - InterTime;
+            MaxTime = t > MaxTime ? t : MaxTime;
+            MinTime = t < MinTime ? t : MinTime;
+        }
+        else {
+            ErrorList.add( GetCalcul("") + "  :  " + val );
+            NbrCalKo++;
+        }
 
+        CptCalc++;
         return res;
     }
 
@@ -191,8 +239,30 @@ class CalculArithm extends CalculBase
         int opInd = rand.nextInt( ListOperation.size() );
         Operation = ListOperation.get(opInd);
 
-        int n1 = rand.nextInt( MaxNumber - MinNumber ) + MinNumber;
-        int n2 = rand.nextInt( MaxNumber - MinNumber ) + MinNumber;
+        int n1 = 0;
+        int max = 0;
+        int n2 = 0;
+
+        n1 = rand.nextInt(MaxNumber - MinNumber) + MinNumber;
+
+        switch (Operation) {
+            case Plus:
+            max = MaxNumber - Math.abs(n1);
+            n2 = rand.nextInt(max - MinNumber) + MinNumber;
+                break;
+
+            case Minus:
+                n2 = rand.nextInt(n1);
+                break;
+
+            case Multiply:
+                n1 = rand.nextInt(MaxNumber - MinNumber) + MinNumber;
+                break;
+
+            case Divid:
+               n2 = n1;
+        }
+
         ResInt = (int)( Calcul(n1,n2,Operation) );
         Nbr1 = Integer.toString(n1);
         Nbr2 = Integer.toString(n2);

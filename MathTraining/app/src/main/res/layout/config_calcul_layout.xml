@@ -5,35 +5,71 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView android:text= "@string/liv_choix_title"
+    <TextView android:text= "@string/calc_choix_nombre"
         style="@style/StyleTextViewTitle"/>
 
-        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/tl_livret_choice"
-            style="@style/StyleTable">
+    <RadioGroup
+        android:id="@+id/rg_calc_value_max_number"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-            <TableRow>
-                <CheckBox style="@style/StyleRadioButton" android:text="1"/>
-                <CheckBox style="@style/StyleRadioButton" android:text="2"/>
-                <CheckBox style="@style/StyleRadioButton" android:text="3"/>
-            </TableRow>
-            <TableRow>
-                <CheckBox style="@style/StyleRadioButton" android:text="4"/>
-                <CheckBox style="@style/StyleRadioButton" android:text="5"/>
-                <CheckBox style="@style/StyleRadioButton" android:text="6"/>
-            </TableRow>
-            <TableRow>
-                <CheckBox style="@style/StyleRadioButton" android:text="7"/>
-                <CheckBox style="@style/StyleRadioButton" android:text="8"/>
-                <CheckBox style="@style/StyleRadioButton" android:text="9"/>
-            </TableRow>
-            <TableRow>
-                <CheckBox style="@style/StyleRadioButton" android:text="10"/>
-                <CheckBox style="@style/StyleRadioButton" android:text="11"/>
-                <CheckBox style="@style/StyleRadioButton" android:text="12"/>
-            </TableRow>
+        <RadioButton
+            style="@style/StyleRadioButtonHoriz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10"
+            />
 
-        </TableLayout>
+        <RadioButton
+            style="@style/StyleRadioButtonHoriz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20" />
+
+        <RadioButton
+            style="@style/StyleRadioButtonHoriz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100" />
+
+    </RadioGroup>
+
+    <TextView android:text= "@string/calc_choix_operation"
+        style="@style/StyleTextViewTitle"/>
+
+    <RadioGroup
+        android:id="@+id/rg_calc_operation"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            style="@style/StyleRadioButtonHoriz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="+"
+            />
+
+        <CheckBox
+            style="@style/StyleRadioButtonHoriz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-" />
+
+        <CheckBox
+            style="@style/StyleRadioButtonHoriz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X" />
+
+        <CheckBox
+            style="@style/StyleRadioButtonHoriz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/" />
+    </RadioGroup>
 
     <TextView style="@style/StyleTextViewTitle"
         android:text="@string/liv_type_res"/>
@@ -95,7 +131,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/bt_livret_continu"
+        android:id="@+id/bt_calc_continu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_continu"
@@ -103,6 +139,4 @@
         android:layout_marginTop="20dp"/>
 
 </LinearLayout>
-
-
 

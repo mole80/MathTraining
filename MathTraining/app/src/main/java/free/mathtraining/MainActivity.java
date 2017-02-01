@@ -32,16 +32,7 @@ public class MainActivity extends AppCompatActivity {
         bt_calc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<CalculBase.eOperation> op = new ArrayList<CalculBase.eOperation>();
-                op.add(CalculBase.eOperation.Plus);
-
-                    CalculArithm c = new CalculArithm(1,10,op);
-
-                    c.NbrCalc = 10;
-                    DataAppl.getInstance().Calcul = c;
-
-                    Intent i = new Intent(getApplicationContext(), CalculActivity.class);
-                    i.putExtra("write_answer", true );
+                    Intent i = new Intent(getApplicationContext(), config_calcul_activity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(i);

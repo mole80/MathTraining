@@ -4,6 +4,10 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
+    //Calcul
+    <string name="calc_choix_nombre">Choix nombres maximun</string>
+    <string name="calc_choix_operation">Choix des opérations</string>
+
     // Livrets
     <string name="liv_title">Livrets</string>
     <string name="liv_choix_title">Choix des livrets</string>

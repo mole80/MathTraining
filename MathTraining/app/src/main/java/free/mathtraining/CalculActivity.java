@@ -1,21 +1,23 @@
 package free.mathtraining;
 
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class CalculActivity extends AppCompatActivity implements View.OnClickListener{
 
     final String NO_RESULT = "-";
+    public static final int CHOOSE_BACK = 10;
+    public static final int RESULT_RESTART = 100;
+    public static final int RESULT_GO_MENU = 200;
 
     public static final String TAG_IS_WRITE_ANSWER = "is_write_answer";
 
@@ -28,6 +30,31 @@ public class CalculActivity extends AppCompatActivity implements View.OnClickLis
     {
         TextView tv = (TextView)findViewById(R.id.tv_calcul);
         tv.setText(cal.GetCalcul(""));
+    }
+
+    void ShowResultImage(boolean res)
+    {
+        ImageView iv = (ImageView)findViewById(R.id.iv_tick_result);
+        if( res )
+            iv.setImageResource(R.drawable.ok);
+        else
+            iv.setImageResource(R.drawable.not_ok);
+
+        iv.setVisibility(View.VISIBLE);
+
+         new CountDownTimer(300,300){
+             @Override
+             public void onTick(long l) {
+
+             }
+
+             @Override
+             public void onFinish() {
+                 ImageView iv = (ImageView)findViewById(R.id.iv_tick_result);
+                 iv.setVisibility(View.GONE);
+             }
+         }.start();
+
     }
 
     void SetNumberCalc()
@@ -63,8 +90,8 @@ public class CalculActivity extends AppCompatActivity implements View.OnClickLis
     protected void onPostResume() {
         super.onPostResume();
 
-         cal.StartNewGame();
-         NewCalcul();
+        // cal.StartNewGame();
+        // NewCalcul();
     }
 
     @Override
@@ -90,6 +117,20 @@ public class CalculActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if( requestCode == CHOOSE_BACK )
+        {
+            if( resultCode == RESULT_GO_MENU )
+                finish();
+            else
+            {
+                cal.StartNewGame();
+                NewCalcul();
+            }
+        }
+    }
+
+    @Override
     public void onClick(View view) {
 
         try {
@@ -99,19 +140,23 @@ public class CalculActivity extends AppCompatActivity implements View.OnClickLis
                 TextView tv = (TextView)findViewById(R.id.tv_result);
                 boolean res = cal.Check(tv.getText().toString());
 
-                if( res ) {
-                    if (cal.IsFinished()) {
-                        cal.EndGame();
+                ShowResultImage(res);
 
-                        Intent i = new Intent(this, result_activity.class);
-                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(i);
+                if (cal.IsFinished()) {
+                    cal.EndGame();
 
-                    } else
-                        NewCalcul();
+                    Intent i = new Intent(this, result_activity.class);
+                    //i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    //i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivityForResult(i, CHOOSE_BACK);
                 }
-                SetTextResult(NO_RESULT);
+                else if( res ) {
+                    NewCalcul();
+                }
+                else {
+                    SetNumberCalc();
+                    SetTextResult(NO_RESULT);
+                }
 
             } else if (b.getText().toString().toLowerCase().equals("c")) {
                 SetTextResult(NO_RESULT);

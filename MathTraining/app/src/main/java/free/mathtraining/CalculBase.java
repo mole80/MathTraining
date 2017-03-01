@@ -9,6 +9,7 @@ public class CalculBase {
     public enum eType {FindFirst, FindSecond, FindRes};
 
     public ArrayList<String> ErrorList;
+    public List<eType> ListType;
 
     public int NbrCalc;
     public int NbrCalOk;
@@ -49,8 +50,9 @@ public class CalculBase {
         }
     }
 
-    public CalculBase()
+    public CalculBase(List<eType> listType)
     {
+        ListType = listType;
         ErrorList = new ArrayList<String>();
         NbrCalc = 0;
         NbrCalOk = 0;
@@ -154,8 +156,8 @@ public class CalculBase {
 
     public void SetNextType()
     {
-        int tmp = rand.nextInt(3);
-        Type = eType.values()[tmp];
+        int ind = rand.nextInt( ListType.size() );
+        Type = ListType.get(ind);
     }
 
     public void StartNewGame()
@@ -224,12 +226,15 @@ class CalculArithm extends CalculBase
     public List<eOperation> ListOperation;
     public int MaxNumber;
     public int MinNumber;
+    public int MultipleNumber;
     public int ResInt;
 
-    public CalculArithm(int min, int max, List<eOperation> op)
+    public CalculArithm(int min, int max, int multipleNumber, List<eOperation> op, List<eType> listType)
     {
-        MinNumber = min;
-        MaxNumber = max;
+        super(listType);
+        MultipleNumber = multipleNumber;
+        MinNumber = min / multipleNumber;
+        MaxNumber = max / multipleNumber;
         ListOperation = op;
     }
 
@@ -243,12 +248,15 @@ class CalculArithm extends CalculBase
         int max = 0;
         int n2 = 0;
 
-        n1 = rand.nextInt(MaxNumber - MinNumber) + MinNumber;
+        int tmpMax = MaxNumber / MultipleNumber;
+        int tmpMin = MinNumber / MultipleNumber;
+
+        n1 = rand.nextInt(tmpMax - tmpMin) + tmpMin;
 
         switch (Operation) {
             case Plus:
-            max = MaxNumber - Math.abs(n1);
-            n2 = rand.nextInt(max - MinNumber) + MinNumber;
+            max = tmpMax - Math.abs(n1);
+            n2 = rand.nextInt(max - tmpMin) + tmpMin;
                 break;
 
             case Minus:
@@ -256,12 +264,15 @@ class CalculArithm extends CalculBase
                 break;
 
             case Multiply:
-                n1 = rand.nextInt(MaxNumber - MinNumber) + MinNumber;
+                n1 = rand.nextInt(tmpMax - tmpMin) + tmpMin;
                 break;
 
             case Divid:
                n2 = n1;
         }
+
+        n1 = n1 * MultipleNumber;
+        n2 = n2 * MultipleNumber;
 
         ResInt = (int)( Calcul(n1,n2,Operation) );
         Nbr1 = Integer.toString(n1);
@@ -278,10 +289,16 @@ class Livret extends CalculBase{
     public List<String> LivretList;
     public int ResInt;
 
-    public Livret(List<String> livret)
+    public Livret(List<String> livret, List<eType> listType)
     {
+        super(listType);
         LivretList = livret;
         Operation = eOperation.Multiply;
+    }
+
+    public void TestAllValues()
+    {
+        int nbr = LivretList.size() * 12;
     }
 
     public void NextCalcul()
@@ -297,7 +314,6 @@ class Livret extends CalculBase{
         Nbr2 = Integer.toString(n2);
         Res = Integer.toString(ResInt);
 
-        int tmp = rand.nextInt(2) + 1;
-        Type = eType.values()[tmp];
+        SetNextType();
     }
 }

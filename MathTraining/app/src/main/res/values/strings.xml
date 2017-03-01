@@ -7,6 +7,10 @@
     //Calcul
     <string name="calc_choix_nombre">Choix nombres maximun</string>
     <string name="calc_choix_operation">Choix des opérations</string>
+    <string name="calc_choix_type_calc">Choix du type de calcul</string>
+    <string name="calc_type_end">2 + 3 = ?</string>
+    <string name="calc_type_inner">2 + ? = 5</string>
+    <string name="calc_number_max_100_to_10">100 / 10</string>
 
     // Livrets
     <string name="liv_title">Livrets</string>

@@ -31,6 +31,12 @@
             style="@style/StyleRadioButtonHoriz"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/calc_number_max_100_to_10" />
+
+        <RadioButton
+            style="@style/StyleRadioButtonHoriz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="100" />
 
     </RadioGroup>
@@ -98,7 +104,38 @@
             style="@style/StyleRadioButtonHoriz"
             android:text="@string/liv_res_write"/>
 
-            </RadioGroup>
+       </RadioGroup>
+
+
+    <TextView style="@style/StyleTextViewTitle"
+        android:text="@string/calc_choix_type_calc"/>
+
+    <RadioGroup
+        android:id="@+id/rg_type_choice"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_width="match_parent">
+
+        <CheckBox
+            android:id="@+id/rb_type_end"
+            style="@style/StyleRadioButtonHoriz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/calc_type_end"
+            android:layout_column="0"
+            />
+
+        <CheckBox
+            android:checked="true"
+            android:id="@+id/rb_type_inner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            style="@style/StyleRadioButtonHoriz"
+            android:text="@string/calc_type_inner"/>
+
+    </RadioGroup>
+
 
      <TextView style="@style/StyleTextViewTitle"
         android:text="@string/liv_nbr_calculs"/>
